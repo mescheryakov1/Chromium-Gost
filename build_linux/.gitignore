@@ -7,5 +7,6 @@
 !chromium-gost-env.sh
 !chromium-gost-prepare.sh
 !chromium-gost-publish-release.sh
+!chromium-gost-github-build.sh
 !gostssl.sln
 !gostssl.vcxproj
