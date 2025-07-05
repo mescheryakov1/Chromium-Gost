@@ -1,0 +1,33 @@
+name: Build Linux
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git curl python3 gperf ninja-build
+          sudo apt-get install -y clang build-essential
+
+      - name: Build Chromium-Gost
+        run: |
+          bash build_linux/chromium-gost-github-build.sh
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: chromium-gost-linux
+          path: build_linux/chromium-gost-*
+
